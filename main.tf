@@ -27,14 +27,19 @@ resource "auth0_client" "client" {
   jwt_configuration {
     alg = "RS256"
   }
-  grant_types     = ["urn:ietf:params:oauth:grant-type:device_code", "refresh_token"]
-  oidc_conformant = true
+  grant_types                = ["urn:ietf:params:oauth:grant-type:device_code", "refresh_token"]
+  oidc_conformant            = true
   token_endpoint_auth_method = "none"
 }
 
 output "AUTH0_CLIENT_ID" {
   sensitive = true
   value     = auth0_client.client.client_id
+}
+
+output "AUTH0_CLIENT_SECRET" {
+  sensitive = true
+  value     = auth0_client.client.client_secret
 }
 
 data "auth0_tenant" "current" {}
